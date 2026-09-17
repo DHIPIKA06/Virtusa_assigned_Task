@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Dynamic Theme Switcher</title>
+<style>
+    :root {
+        --bg-color: #ffffff;
+        --text-color: #1a1a1a;
+        --button-bg: #1a1a1a;
+        --button-text: #ffffff;
+    }
+
+    [data-theme="dark"] {
+        --bg-color: #1a1a1a;
+        --text-color: #f0f0f0;
+        --button-bg: #f0f0f0;
+        --button-text: #1a1a1a;
+    }
+
+    body {
+        background-color: var(--bg-color);
+        color: var(--text-color);
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        transition: background-color 0.2s ease, color 0.2s ease;
+    }
+
+    #themeToggleBtn {
+        margin-top: 20px;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 6px;
+        background-color: var(--button-bg);
+        color: var(--button-text);
+        cursor: pointer;
+        font-size: 1rem;
+    }
+</style>
+</head>
+<body>
+    <h1>Dynamic Theme Switcher</h1>
+    <p>Current theme: <span id="currentThemeLabel"></span></p>
+    <button id="themeToggleBtn">Toggle Dark / Light Mode</button>
+
+<script>
+    /**
+     * Applies a theme ("light" or "dark") to the document and
+     * persists the choice so it's remembered on the next visit.
+     * The theme value is never hardcoded into the toggle logic —
+     * it's read from and written to storage dynamically.
+     */
+    function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        document.getElementById("currentThemeLabel").textContent = theme;
+        try {
+            localStorage.setItem("preferredTheme", theme);
+        } catch (err) {
+            console.warn("Could not persist theme preference:", err);
+        }
+    }
+
+    function getStoredTheme() {
+        try {
+            return localStorage.getItem("preferredTheme");
+        } catch (err) {
+            return null;
+        }
+    }
+
+    function toggleTheme() {
+        const current = document.documentElement.getAttribute("data-theme") || "light";
+        const next = current === "light" ? "dark" : "light";
+        applyTheme(next);
+    }
+
+    // Initialize using a stored preference, defaulting to light mode.
+    const initialTheme = getStoredTheme() || "light";
+    applyTheme(initialTheme);
+
+    document.getElementById("themeToggleBtn").addEventListener("click", toggleTheme);
+</script>
+</body>
+</html>
