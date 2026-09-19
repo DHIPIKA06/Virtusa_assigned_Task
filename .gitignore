@@ -1,0 +1,62 @@
+# ==============================
+# Java
+# ==============================
+
+# Compiled Java bytecode
+*.class
+
+# Java build directories
+target/
+out/
+build/
+
+# ==============================
+# Node.js / JavaScript / TypeScript
+# ==============================
+
+# Dependencies
+node_modules/
+
+# TypeScript compiled output
+dist/
+build/
+
+# TypeScript incremental build files
+*.tsbuildinfo
+
+# npm logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==============================
+# Environment / Secrets
+# ==============================
+
+.env
+.env.*
+!.env.example
+
+# ==============================
+# OS generated files
+# ==============================
+
+.DS_Store
+Thumbs.db
+
+# ==============================
+# IDE / Editor files
+# ==============================
+
+.vscode/
+.idea/
+*.iml
+
+# ==============================
+# Temporary files
+# ==============================
+
+*.log
+*.tmp
+*.swp
